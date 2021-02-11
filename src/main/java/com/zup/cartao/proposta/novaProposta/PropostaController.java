@@ -24,7 +24,7 @@ public class PropostaController {
     public ResponseEntity<?> novaProposta(@RequestBody @Valid NovaPropostaRequest request,
                                           UriComponentsBuilder uriBuilder){
 
-        Optional<Proposta> possivelProposta = propostaRepository.findByEmail(request.getEmail());
+        Optional<Proposta> possivelProposta = propostaRepository.findByCnpjOuCpf(request.getCnpjOuCpf());
 
         if(possivelProposta.isEmpty()){
             Proposta novaProposta = propostaRepository.save(request.paraProposta());
