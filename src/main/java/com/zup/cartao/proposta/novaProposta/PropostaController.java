@@ -10,6 +10,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.HashMap;
 import java.util.Optional;
 
 
@@ -31,6 +32,8 @@ public class PropostaController {
             URI uri = uriBuilder.path("/api/propostas/{id}").buildAndExpand(novaProposta.getId()).toUri();
             return ResponseEntity.created(uri).body(new PropostaResponse(novaProposta));
         }
-        return ResponseEntity.unprocessableEntity().build();
+        HashMap<String, Object> resposta = new HashMap<>();
+        resposta.put("mensagem", "Já existe solicitação para esse cliente.");
+        return ResponseEntity.unprocessableEntity().body(resposta);
     }
 }
