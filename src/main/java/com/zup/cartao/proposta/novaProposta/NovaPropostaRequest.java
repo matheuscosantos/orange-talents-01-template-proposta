@@ -12,8 +12,12 @@ public class NovaPropostaRequest {
 
     @NotNull
     @NotEmpty
+    private String nome;
+
+    @NotNull
+    @NotEmpty
     @CPFouCNPJ
-    private String cnpjOuCpf;
+    private String documento;
 
     @NotNull
     @NotEmpty
@@ -27,8 +31,12 @@ public class NovaPropostaRequest {
     @Positive
     private BigDecimal salario;
 
-    public String getCnpjOuCpf() {
-        return cnpjOuCpf;
+    public String getNome() {
+        return nome;
+    }
+
+    public String getDocumento() {
+        return documento;
     }
 
     public String getEmail() {
@@ -44,7 +52,8 @@ public class NovaPropostaRequest {
     }
 
     public Proposta paraProposta() {
-        return new Proposta(this.cnpjOuCpf,
+        return new Proposta(this.nome,
+                            this.documento,
                             this.email,
                             new Endereco( endereco.getCep(),
                                           endereco.getLogradouro(),

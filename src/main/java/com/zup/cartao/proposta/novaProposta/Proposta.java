@@ -18,8 +18,12 @@ public class Proposta {
 
     @NotNull
     @NotEmpty
+    private String nome;
+
+    @NotNull
+    @NotEmpty
     @CPFouCNPJ
-    private String cnpjOuCpf;
+    private String documento;
 
     @NotNull
     @NotEmpty
@@ -33,32 +37,44 @@ public class Proposta {
     @Positive
     private BigDecimal salario;
 
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
     @Deprecated
     public Proposta() {
     }
 
-    public Proposta(@NotNull @NotEmpty String cnpjOuCpf,
+    public Proposta(@NotNull @NotEmpty String nome,
+                    @NotNull @NotEmpty String documento,
                     @NotNull @NotEmpty String email,
                     @NotNull Endereco endereco,
                     @NotNull BigDecimal salario) {
-        Assert.isTrue(cnpjOuCpf != null || cnpjOuCpf.trim().equals(""), "O CNPJ ou CPF são obrigatórios");
+        Assert.isTrue(nome != null || nome.trim().equals(""), "O nome é obrigatórios");
+        Assert.isTrue(documento != null || documento.trim().equals(""), "O documento é obrigatórios");
         Assert.isTrue(email != null || email.trim().equals(""), "O email é obrigatórios");
         Assert.isTrue(endereco != null, "O endereço é obrigatório");
         Assert.isTrue(salario != null , "O salário é obrigatórios");
         Assert.isTrue(salario.compareTo(BigDecimal.ZERO) > 0, "O valor do salário deve ser positivo");
 
-        this.cnpjOuCpf = cnpjOuCpf;
+        this.nome = nome;
+        this.documento = documento;
         this.email = email;
         this.endereco = endereco;
         this.salario = salario;
     }
 
+
+
     public Long getId() {
         return id;
     }
 
-    public String getCnpjOuCpf() {
-        return cnpjOuCpf;
+    public String getNome() {
+        return nome;
+    }
+
+    public String getDocumento() {
+        return documento;
     }
 
     public String getEmail() {
@@ -71,5 +87,13 @@ public class Proposta {
 
     public BigDecimal getSalario() {
         return salario;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void atualizaStatus(String solicitacao){
+        this.status = Status.resultadoPara(solicitacao);
     }
 }
