@@ -8,7 +8,9 @@ public class PropostaResponse {
     @JsonProperty
     private Long id;
     @JsonProperty
-    private String cnpjOuCpf;
+    private String nome;
+    @JsonProperty
+    private String documento;
     @JsonProperty
     private String email;
     @JsonProperty
@@ -17,8 +19,9 @@ public class PropostaResponse {
     private BigDecimal salario;
 
     public PropostaResponse(Proposta proposta) {
+        this.nome = proposta.getNome();
         this.id = proposta.getId();
-        this.cnpjOuCpf = proposta.getCnpjOuCpf();
+        this.documento = proposta.getDocumento();
         this.email = proposta.getEmail();
         this.endereco = proposta.getEndereco();
         this.salario = proposta.getSalario();
