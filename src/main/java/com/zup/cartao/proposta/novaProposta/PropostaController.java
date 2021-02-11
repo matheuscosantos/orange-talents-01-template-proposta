@@ -10,6 +10,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.Optional;
 
 
 @RestController
@@ -22,8 +23,14 @@ public class PropostaController {
     @PostMapping
     public ResponseEntity<?> novaProposta(@RequestBody @Valid NovaPropostaRequest request,
                                           UriComponentsBuilder uriBuilder){
-        Proposta novaProposta = propostaRepository.save(request.paraProposta());
-        URI uri = uriBuilder.path("/api/propostas/{id}").buildAndExpand(novaProposta.getId()).toUri();
-        return ResponseEntity.created(uri).body(new PropostaResponse(novaProposta));
+
+        Optional<Proposta> possivelProposta = propostaRepository.findByEmail(request.getEmail());
+
+        if(possivelProposta.isEmpty()){
+            Proposta novaProposta = propostaRepository.save(request.paraProposta());
+            URI uri = uriBuilder.path("/api/propostas/{id}").buildAndExpand(novaProposta.getId()).toUri();
+            return ResponseEntity.created(uri).body(new PropostaResponse(novaProposta));
+        }
+        return ResponseEntity.unprocessableEntity().build();
     }
 }

@@ -33,6 +33,10 @@ public class Proposta {
     @Positive
     private BigDecimal salario;
 
+    @Deprecated
+    public Proposta() {
+    }
+
     public Proposta(@NotNull @NotEmpty String cnpjOuCpf,
                     @NotNull @NotEmpty String email,
                     @NotNull Endereco endereco,
