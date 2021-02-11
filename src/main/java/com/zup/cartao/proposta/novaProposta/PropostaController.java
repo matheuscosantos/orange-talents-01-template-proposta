@@ -20,11 +20,14 @@ public class PropostaController {
 
     PropostaRepository propostaRepository;
     AnaliseClient analiseClient;
+    SolicitaCartaoClient solicitaCartaoClient;
 
     public PropostaController(PropostaRepository propostaRepository,
-                              AnaliseClient analiseClient) {
+                              AnaliseClient analiseClient,
+                              SolicitaCartaoClient solicitaCartaoClient) {
         this.propostaRepository = propostaRepository;
         this.analiseClient = analiseClient;
+        this.solicitaCartaoClient = solicitaCartaoClient;
     }
 
     @PostMapping
@@ -43,11 +46,24 @@ public class PropostaController {
         URI uri = uriBuilder.path("/api/propostas/{id}").buildAndExpand(novaProposta.getId()).toUri();
 
         try{
+//          Proposta APROVADA
             AnaliseClient.ConsultaStatusRequest requisicaoDaAnalise = new AnaliseClient.ConsultaStatusRequest(novaProposta);
             AnaliseClient.ConsultaAnaliseResponse resposta = analiseClient.consultaStatus(requisicaoDaAnalise);
             novaProposta.atualizaStatus(resposta.getResultadoSolicitacao());
             propostaRepository.save(novaProposta);
-            return ResponseEntity.created(uri).body(new PropostaResponse(novaProposta));
+//
+            try {
+//          Solicita Cartão
+                SolicitaCartaoClient.NovoCartaoRequest requisicaoDoCartao = new SolicitaCartaoClient.NovoCartaoRequest(novaProposta);
+                SolicitaCartaoClient.NovoCartaoResponse respostaCartao = solicitaCartaoClient.solicitaCartao(requisicaoDoCartao);
+                novaProposta.aprovaSolicitacao();
+                novaProposta.adicionaCartao(respostaCartao.getId());
+                propostaRepository.save(novaProposta);
+//
+                return ResponseEntity.created(uri).body(new PropostaResponse(novaProposta));
+            }catch (FeignException.UnprocessableEntity e) {
+                return ResponseEntity.created(uri).body(new PropostaResponse(novaProposta));
+            }
         }catch (FeignException.UnprocessableEntity e){
             novaProposta.atualizaStatus("COM_RESTRICAO");
             propostaRepository.save(novaProposta);

@@ -40,6 +40,8 @@ public class Proposta {
     @Enumerated(EnumType.STRING)
     private Status status;
 
+    private String numeroDoCartao;
+
     @Deprecated
     public Proposta() {
     }
@@ -62,8 +64,6 @@ public class Proposta {
         this.endereco = endereco;
         this.salario = salario;
     }
-
-
 
     public Long getId() {
         return id;
@@ -93,7 +93,19 @@ public class Proposta {
         return status;
     }
 
+    public String getNumeroDoCartao() {
+        return numeroDoCartao;
+    }
+
     public void atualizaStatus(String solicitacao){
         this.status = Status.resultadoPara(solicitacao);
+    }
+
+    public void adicionaCartao(String cartao){
+        this.numeroDoCartao = cartao;
+    }
+
+    public void aprovaSolicitacao(){
+        this.status = Status.APROVADA;
     }
 }
