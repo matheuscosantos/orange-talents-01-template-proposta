@@ -16,15 +16,15 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/api/propostas")
-public class PropostaController {
+public class NovaPropostaController {
 
     PropostaRepository propostaRepository;
     AnaliseClient analiseClient;
     SolicitaCartaoClient solicitaCartaoClient;
 
-    public PropostaController(PropostaRepository propostaRepository,
-                              AnaliseClient analiseClient,
-                              SolicitaCartaoClient solicitaCartaoClient) {
+    public NovaPropostaController(PropostaRepository propostaRepository,
+                                  AnaliseClient analiseClient,
+                                  SolicitaCartaoClient solicitaCartaoClient) {
         this.propostaRepository = propostaRepository;
         this.analiseClient = analiseClient;
         this.solicitaCartaoClient = solicitaCartaoClient;

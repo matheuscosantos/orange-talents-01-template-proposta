@@ -3,6 +3,7 @@ package com.zup.cartao.proposta.novaProposta;
 import org.springframework.util.Assert;
 
 import javax.persistence.Embeddable;
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -40,14 +41,14 @@ public class Endereco {
     @NotEmpty
     private String pais;
 
-    public Endereco(@NotEmpty String cep,
-                    @NotEmpty String logradouro,
-                    @NotEmpty String numero,
-                    @NotEmpty String complemento,
-                    @NotEmpty String bairro,
-                    @NotEmpty String municipio,
-                    @NotEmpty String estado,
-                    @NotEmpty String pais) {
+    public Endereco(@NotEmpty @NotNull String cep,
+                    @NotEmpty @NotNull String logradouro,
+                    @NotEmpty @NotNull String numero,
+                    @NotEmpty @NotNull String complemento,
+                    @NotEmpty @NotNull String bairro,
+                    @NotEmpty @NotNull String municipio,
+                    @NotEmpty @NotNull String estado,
+                    @NotEmpty @NotNull String pais) {
         Assert.isTrue(cep != null | cep.trim().equals(""), "O Cep é obrigatório.");
         Assert.isTrue(logradouro != null | logradouro.trim().equals(""), "O logradouro é obrigatório.");
         Assert.isTrue(numero != null | numero.trim().equals(""), "O número é obrigatório.");

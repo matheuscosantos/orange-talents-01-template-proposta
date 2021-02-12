@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
@@ -36,6 +37,7 @@ public class Proposta {
 
     @NotNull
     @Embedded
+    @Valid
     private Endereco endereco;
 
     @NotNull

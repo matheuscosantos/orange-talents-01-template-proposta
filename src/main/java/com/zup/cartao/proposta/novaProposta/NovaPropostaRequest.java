@@ -3,6 +3,7 @@ package com.zup.cartao.proposta.novaProposta;
 import com.sun.istack.NotNull;
 import com.zup.cartao.proposta.config.validators.CPFouCNPJ;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Positive;
@@ -25,6 +26,7 @@ public class NovaPropostaRequest {
     private String email;
 
     @NotNull
+    @Valid
     private NovoEnderecoRequest endereco;
 
     @NotNull
