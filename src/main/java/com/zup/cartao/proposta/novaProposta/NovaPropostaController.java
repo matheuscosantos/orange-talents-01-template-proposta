@@ -41,8 +41,8 @@ public class NovaPropostaController {
             resposta.put("mensagem", "Já existe solicitação para esse cliente.");
             return ResponseEntity.unprocessableEntity().body(resposta);
         }
-
-        Proposta novaProposta = propostaRepository.save(request.paraProposta());
+        Proposta novaProposta = request.paraProposta();
+        propostaRepository.save(novaProposta);
         URI uri = uriBuilder.path("/api/propostas/{id}").buildAndExpand(novaProposta.getId()).toUri();
 
         try{
