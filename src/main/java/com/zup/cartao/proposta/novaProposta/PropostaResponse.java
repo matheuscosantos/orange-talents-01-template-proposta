@@ -17,6 +17,10 @@ public class PropostaResponse {
     private Endereco endereco;
     @JsonProperty
     private BigDecimal salario;
+    @JsonProperty
+    private Status status;
+    @JsonProperty
+    private String numeroDoCartao;
 
     public PropostaResponse(Proposta proposta) {
         this.nome = proposta.getNome();
@@ -25,6 +29,8 @@ public class PropostaResponse {
         this.email = proposta.getEmail();
         this.endereco = proposta.getEndereco();
         this.salario = proposta.getSalario();
+        this.status = proposta.getStatus();
+        this.numeroDoCartao = proposta.getNumeroDoCartao();
     }
 
 }
