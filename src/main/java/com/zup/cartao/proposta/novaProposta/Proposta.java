@@ -1,6 +1,10 @@
 package com.zup.cartao.proposta.novaProposta;
 
 import com.zup.cartao.proposta.config.validators.CPFouCNPJ;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
@@ -10,6 +14,7 @@ import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 
 @Entity
+@Component
 public class Proposta {
 
     @Id
@@ -41,6 +46,8 @@ public class Proposta {
     private Status status;
 
     private String numeroDoCartao;
+
+    private static final Logger log = LoggerFactory.getLogger(Proposta.class);
 
     @Deprecated
     public Proposta() {
@@ -105,7 +112,10 @@ public class Proposta {
         this.numeroDoCartao = cartao;
     }
 
-    public void aprovaSolicitacao(){
-        this.status = Status.APROVADA;
+    @Scheduled(fixedDelay = 10000)
+    public void verificaCriacaoDoCartao(){
+        if(numeroDoCartao != null){
+            this.status = Status.APROVADA;
+        }
     }
 }
