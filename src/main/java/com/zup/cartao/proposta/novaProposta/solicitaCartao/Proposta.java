@@ -1,4 +1,4 @@
-package com.zup.cartao.proposta.novaProposta;
+package com.zup.cartao.proposta.novaProposta.solicitaCartao;
 
 import com.zup.cartao.proposta.config.validators.CPFouCNPJ;
 import org.slf4j.Logger;
