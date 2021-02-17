@@ -1,4 +1,4 @@
-package com.zup.cartao.proposta.novaProposta;
+package com.zup.cartao.proposta.novaProposta.solicitaCartao;
 
 import com.sun.istack.NotNull;
 
