@@ -1,12 +1,11 @@
 package com.zup.cartao.proposta.solicitaBloqueio;
 
-import com.zup.cartao.proposta.novaBiometria.NovaBiometriaResponse;
 import com.zup.cartao.proposta.solicitaCartao.Proposta;
 import com.zup.cartao.proposta.solicitaCartao.PropostaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.zup.cartao.proposta.solicitaCartao.Status;
+import feign.FeignException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -21,11 +20,14 @@ public class NovoBloqueioController {
 
     BloqueioRepository bloqueioRepository;
     PropostaRepository propostaRepository;
+    BloqueiaCartaoClient bloqueiaCartaoClient;
 
     public NovoBloqueioController(BloqueioRepository bloqueioRepository,
-                                  PropostaRepository propostaRepository) {
+                                  PropostaRepository propostaRepository,
+                                  BloqueiaCartaoClient bloqueiaCartaoClient) {
         this.bloqueioRepository = bloqueioRepository;
         this.propostaRepository = propostaRepository;
+        this.bloqueiaCartaoClient = bloqueiaCartaoClient;
     }
 
     @PostMapping
@@ -40,16 +42,28 @@ public class NovoBloqueioController {
             return ResponseEntity.notFound().build();
         }
 
+        if(possivelProposta.get().getStatus().equals(Status.BLOQUEADO)){
+            return ResponseEntity.status(HttpStatus.NOT_MODIFIED).build();
+        }
+
         String ip = servletRequest.getHeader("X-FORWARDED-FOR");
         if (ip == null) {
             ip = servletRequest.getRemoteAddr();
         }
+
         try{
+            BloqueiaCartaoClient.BloqueiaCartaoRequest requisicaoParaCancelamento = new BloqueiaCartaoClient.BloqueiaCartaoRequest("API Propostas");
+            BloqueiaCartaoClient.BloqueiaCartaoResponse respostaDoCancelamento = bloqueiaCartaoClient.bloqueiaCartao(requisicaoParaCancelamento, request.getIdCartao());
+
             Bloqueio novoBloqueio = bloqueioRepository.save(request.paraBloqueio(userAgent, ip));
+
+            possivelProposta.get().cancelaCartao();
+            propostaRepository.save(possivelProposta.get());
+
             URI uri = uriBuilder.path("/api/solicita-bloqueio/{id}").buildAndExpand(novoBloqueio.getId()).toUri();
             return ResponseEntity.created(uri).body(new BloqueioResponse(novoBloqueio));
-        }catch (Exception exception){
-            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(request);
+        }catch (FeignException.UnprocessableEntity unprocessableEntity){
+            return ResponseEntity.unprocessableEntity().build();
         }
     }
 }

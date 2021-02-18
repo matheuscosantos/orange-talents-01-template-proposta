@@ -120,4 +120,8 @@ public class Proposta {
             this.status = Status.APROVADA;
         }
     }
+
+    public void cancelaCartao() {
+        this.status = Status.BLOQUEADO;
+    }
 }
