@@ -1,4 +1,4 @@
-package com.zup.cartao.proposta.novaProposta.criaBiometria;
+package com.zup.cartao.proposta.novaBiometria;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.hibernate.annotations.CreationTimestamp;

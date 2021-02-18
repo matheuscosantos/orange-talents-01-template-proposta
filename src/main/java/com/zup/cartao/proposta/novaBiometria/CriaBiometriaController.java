@@ -1,7 +1,7 @@
-package com.zup.cartao.proposta.novaProposta.criaBiometria;
+package com.zup.cartao.proposta.novaBiometria;
 
-import com.zup.cartao.proposta.novaProposta.solicitaCartao.Proposta;
-import com.zup.cartao.proposta.novaProposta.solicitaCartao.PropostaRepository;
+import com.zup.cartao.proposta.solicitaCartao.Proposta;
+import com.zup.cartao.proposta.solicitaCartao.PropostaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

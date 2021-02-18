@@ -1,4 +1,4 @@
-package com.zup.cartao.proposta.novaProposta.criaBiometria;
+package com.zup.cartao.proposta.novaBiometria;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
