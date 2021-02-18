@@ -1,4 +1,4 @@
-package com.zup.cartao.proposta.novaProposta.criaBiometria;
+package com.zup.cartao.proposta.novaBiometria;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;

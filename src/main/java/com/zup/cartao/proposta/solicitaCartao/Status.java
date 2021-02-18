@@ -1,4 +1,4 @@
-package com.zup.cartao.proposta.novaProposta.solicitaCartao;
+package com.zup.cartao.proposta.solicitaCartao;
 
 public enum Status {
     ELEGIVEL, NAO_ELEGIVEL, APROVADA;

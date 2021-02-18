@@ -1,4 +1,4 @@
-package com.zup.cartao.proposta.novaProposta.solicitaCartao;
+package com.zup.cartao.proposta.solicitaCartao;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

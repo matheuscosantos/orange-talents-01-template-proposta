@@ -1,4 +1,4 @@
-package com.zup.cartao.proposta.novaProposta.solicitaCartao;
+package com.zup.cartao.proposta.solicitaCartao;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
