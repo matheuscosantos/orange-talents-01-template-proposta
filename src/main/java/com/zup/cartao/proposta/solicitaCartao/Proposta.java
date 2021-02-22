@@ -4,6 +4,8 @@ import com.zup.cartao.proposta.config.validators.CPFouCNPJ;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
@@ -28,7 +30,6 @@ public class Proposta {
 
     @NotNull
     @NotEmpty
-    @CPFouCNPJ
     private String documento;
 
     @NotNull
@@ -67,8 +68,10 @@ public class Proposta {
         Assert.isTrue(salario != null , "O salário é obrigatórios");
         Assert.isTrue(salario.compareTo(BigDecimal.ZERO) > 0, "O valor do salário deve ser positivo");
 
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
         this.nome = nome;
-        this.documento = documento;
+        this.documento = encoder.encode(documento);
         this.email = email;
         this.endereco = endereco;
         this.salario = salario;
