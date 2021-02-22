@@ -1,8 +1,10 @@
 package com.zup.cartao.proposta.avisoDeViagem;
 
 import com.zup.cartao.proposta.config.validators.ExistsId;
+import com.zup.cartao.proposta.config.validators.UniqueValue;
 import com.zup.cartao.proposta.solicitaCartao.Proposta;
 
+import javax.persistence.Column;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -12,6 +14,7 @@ public class NovaNotificacaoDeViagemRequest {
     @NotNull
     @NotEmpty
     @ExistsId(domainClass = Proposta.class, fieldName = "numeroDoCartao")
+    @Column(unique = true)
     private String idCartao;
 
     @NotNull
