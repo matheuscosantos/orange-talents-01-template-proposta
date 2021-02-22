@@ -23,16 +23,22 @@ public class CarteiraDigital {
     @Column(unique = true)
     private String idCartao;
 
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private CarteiraTipo tipo;
+
     @Deprecated
     public CarteiraDigital() {
     }
 
     public CarteiraDigital(@NotBlank @NotNull @Email String email,
-                           @NotBlank @NotNull String idCartao) {
+                           @NotBlank @NotNull String idCartao,
+                           @NotNull CarteiraTipo tipo) {
         Assert.isTrue(email != null || email.trim().equals(""), "O email do cartão é obrigatório");
         Assert.isTrue(idCartao != null || idCartao.trim().equals(""), "O id do cartão é obrigatório");
         this.email = email;
         this.idCartao = idCartao;
+        this.tipo = tipo;
     }
 
     public Long getId() {
@@ -45,5 +51,9 @@ public class CarteiraDigital {
 
     public String getIdCartao() {
         return idCartao;
+    }
+
+    public CarteiraTipo getTipo() {
+        return tipo;
     }
 }

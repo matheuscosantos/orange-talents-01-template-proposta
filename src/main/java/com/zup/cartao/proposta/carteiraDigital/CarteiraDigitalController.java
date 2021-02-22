@@ -47,6 +47,7 @@ public class CarteiraDigitalController {
         if(possivelCarteira.isPresent()){
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
         }
+
         try{
             CarteiraClient.Request requisicaoDeCarteiraDigital = new CarteiraClient.Request(request.getEmail(), CarteiraTipo.PAYPAL);
             client.consulta(requisicaoDeCarteiraDigital, request.getIdCartao());
