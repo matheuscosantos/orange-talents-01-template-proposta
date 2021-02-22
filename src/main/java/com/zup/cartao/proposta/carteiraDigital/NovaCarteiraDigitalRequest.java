@@ -18,8 +18,11 @@ public class NovaCarteiraDigitalRequest {
     @ExistsId(domainClass = Proposta.class, fieldName = "numeroDoCartao")
     private String idCartao;
 
+    @NotNull
+    public CarteiraTipo tipo;
+
     public CarteiraDigital paraCarteiraDigital(){
-        return new CarteiraDigital(email, idCartao);
+        return new CarteiraDigital(email, idCartao, tipo);
     }
 
     public String getEmail() {
@@ -28,5 +31,9 @@ public class NovaCarteiraDigitalRequest {
 
     public String getIdCartao() {
         return idCartao;
+    }
+
+    public CarteiraTipo getTipo() {
+        return tipo;
     }
 }
