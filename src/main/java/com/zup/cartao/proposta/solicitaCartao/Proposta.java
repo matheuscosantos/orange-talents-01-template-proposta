@@ -1,11 +1,9 @@
 package com.zup.cartao.proposta.solicitaCartao;
 
-import com.zup.cartao.proposta.config.validators.CPFouCNPJ;
+import com.zup.cartao.proposta.util.Encryptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
@@ -60,7 +58,8 @@ public class Proposta {
                     @NotNull @NotEmpty String documento,
                     @NotNull @NotEmpty String email,
                     @NotNull Endereco endereco,
-                    @NotNull BigDecimal salario) {
+                    @NotNull BigDecimal salario,
+                    String password) {
         Assert.isTrue(nome != null || nome.trim().equals(""), "O nome é obrigatórios");
         Assert.isTrue(documento != null || documento.trim().equals(""), "O documento é obrigatórios");
         Assert.isTrue(email != null || email.trim().equals(""), "O email é obrigatórios");
@@ -68,10 +67,11 @@ public class Proposta {
         Assert.isTrue(salario != null , "O salário é obrigatórios");
         Assert.isTrue(salario.compareTo(BigDecimal.ZERO) > 0, "O valor do salário deve ser positivo");
 
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        Encryptor encryptor = new Encryptor(password);
+        String documentoCriptografado = encryptor.encrypt(documento);
 
         this.nome = nome;
-        this.documento = encoder.encode(documento);
+        this.documento = documentoCriptografado;
         this.email = email;
         this.endereco = endereco;
         this.salario = salario;

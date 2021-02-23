@@ -1,4 +1,4 @@
-package com.zup.cartao.proposta.security;
+package com.zup.cartao.proposta.config.security;
 
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

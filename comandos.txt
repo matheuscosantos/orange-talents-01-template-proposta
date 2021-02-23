@@ -1,0 +1,7 @@
+Empacota aplicação
+mvn clean install -Dspring.profiles.active=prod -DskipTests=true
+
+Cria imagem
+docker build -f Dockerfile -t matheuscosantos/propostas .
+
+

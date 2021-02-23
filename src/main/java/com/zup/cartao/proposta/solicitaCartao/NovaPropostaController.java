@@ -1,6 +1,7 @@
 package com.zup.cartao.proposta.solicitaCartao;
 
 import feign.FeignException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,9 @@ import java.util.Optional;
 @RequestMapping(value = "/api/propostas")
 public class NovaPropostaController {
 
+    @Value("${jasypt.password}")
+    private String password;
+
     PropostaRepository propostaRepository;
     AnaliseClient analiseClient;
     SolicitaCartaoClient solicitaCartaoClient;
@@ -33,7 +37,7 @@ public class NovaPropostaController {
     @PostMapping
     public ResponseEntity<?> novaProposta(@RequestBody @Valid NovaPropostaRequest request,
                                           UriComponentsBuilder uriBuilder){
-
+        System.out.println(password);
         Optional<Proposta> possivelProposta = propostaRepository.findByDocumento(request.getDocumento());
 
         if(possivelProposta.isPresent()){
@@ -42,7 +46,7 @@ public class NovaPropostaController {
             return ResponseEntity.unprocessableEntity().body(resposta);
         }
 
-        Proposta novaProposta = propostaRepository.save(request.paraProposta());
+        Proposta novaProposta = propostaRepository.save(request.paraProposta(password));
         URI uri = uriBuilder.path("/api/propostas/{id}").buildAndExpand(novaProposta.getId()).toUri();
 
         try{

@@ -53,9 +53,9 @@ public class NovaPropostaRequest {
         return salario;
     }
 
-    public Proposta paraProposta() {
+    public Proposta paraProposta(String password) {
         return new Proposta(this.nome,
-                            this.documento,
+                            this.documento ,
                             this.email,
                             new Endereco( endereco.getCep(),
                                           endereco.getLogradouro(),
@@ -65,6 +65,7 @@ public class NovaPropostaRequest {
                                           endereco.getMunicipio(),
                                           endereco.getEstado(),
                                           endereco.getPais()),
-                            this.salario);
+                            this.salario,
+                            password);
     }
 }
