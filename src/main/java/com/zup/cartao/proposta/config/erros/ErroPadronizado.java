@@ -1,4 +1,4 @@
-package com.zup.cartao.proposta.config;
+package com.zup.cartao.proposta.config.erros;
 
 import java.util.Collection;
 

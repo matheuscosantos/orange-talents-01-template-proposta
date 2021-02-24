@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @SpringBootApplication
 @EnableFeignClients
 @EnableScheduling
+@EnableWebSecurity
 public class PropostaApplication {
 
 	public static void main(String[] args) {
