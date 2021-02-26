@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/api/cria-biometria")
-public class CriaBiometriaController {
+public class NovaBiometriaController {
 
     @Autowired
     BiometriaRepository biometriaRepository;

@@ -3,7 +3,6 @@ package com.zup.cartao.proposta.solicitaCartao;
 import com.zup.cartao.proposta.util.Encryptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
@@ -109,19 +108,16 @@ public class Proposta {
         return numeroDoCartao;
     }
 
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     public void atualizaStatus(String solicitacao){
         this.status = Status.resultadoPara(solicitacao);
     }
 
     public void adicionaCartao(String cartao){
         this.numeroDoCartao = cartao;
-    }
-
-    @Scheduled(fixedDelay = 10000)
-    public void verificaCriacaoDoCartao(){
-        if(numeroDoCartao != null){
-            this.status = Status.APROVADA;
-        }
     }
 
     public void cancelaCartao() {

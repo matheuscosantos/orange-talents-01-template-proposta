@@ -61,18 +61,18 @@ public class NovaPropostaController {
                 SolicitaCartaoClient.NovoCartaoRequest requisicaoDoCartao = new SolicitaCartaoClient.NovoCartaoRequest(novaProposta);
                 SolicitaCartaoClient.NovoCartaoResponse respostaCartao = solicitaCartaoClient.solicitaCartao(requisicaoDoCartao);
                 novaProposta.adicionaCartao(respostaCartao.getId());
-                novaProposta.verificaCriacaoDoCartao();
+
                 propostaRepository.save(novaProposta);
-                return ResponseEntity.created(uri).body(new PropostaResponse(novaProposta));
+                return ResponseEntity.created(uri).body(new NovaPropostaResponse(novaProposta));
             }catch (FeignException.UnprocessableEntity e) {
-                return ResponseEntity.created(uri).body(new PropostaResponse(novaProposta));
+                return ResponseEntity.created(uri).body(new NovaPropostaResponse(novaProposta));
             }
 //
 //          Proposta NAO_APROVADA
         }catch (FeignException.UnprocessableEntity e){
             novaProposta.atualizaStatus("COM_RESTRICAO");
             propostaRepository.save(novaProposta);
-            return ResponseEntity.created(uri).body(new PropostaResponse(novaProposta));
+            return ResponseEntity.created(uri).body(new NovaPropostaResponse(novaProposta));
         }
 //
     }

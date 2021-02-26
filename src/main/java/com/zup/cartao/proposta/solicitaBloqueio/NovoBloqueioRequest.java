@@ -3,7 +3,7 @@ package com.zup.cartao.proposta.solicitaBloqueio;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-public class BloqueioRequest {
+public class NovoBloqueioRequest {
 
     @NotNull
     @NotEmpty

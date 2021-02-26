@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
 
-public class PropostaResponse {
+public class NovaPropostaResponse {
     @JsonProperty
     private Long id;
     @JsonProperty
@@ -22,7 +22,7 @@ public class PropostaResponse {
     @JsonProperty
     private String numeroDoCartao;
 
-    public PropostaResponse(Proposta proposta) {
+    public NovaPropostaResponse(Proposta proposta) {
         this.nome = proposta.getNome();
         this.id = proposta.getId();
         this.documento = proposta.getDocumento();

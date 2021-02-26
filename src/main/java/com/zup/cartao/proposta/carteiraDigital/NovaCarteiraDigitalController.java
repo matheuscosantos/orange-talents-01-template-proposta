@@ -18,15 +18,15 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/api/cartao/carteira-digital/paypal")
-public class CarteiraDigitalController {
+public class NovaCarteiraDigitalController {
 
     CarteiraDigitalRepository carteiraRepository;
     PropostaRepository propostaRepository;
     CarteiraClient client;
 
-    public CarteiraDigitalController(CarteiraDigitalRepository carteiraRepository,
-                                     PropostaRepository propostaRepository,
-                                     CarteiraClient client) {
+    public NovaCarteiraDigitalController(CarteiraDigitalRepository carteiraRepository,
+                                         PropostaRepository propostaRepository,
+                                         CarteiraClient client) {
         this.carteiraRepository = carteiraRepository;
         this.propostaRepository = propostaRepository;
         this.client = client;
