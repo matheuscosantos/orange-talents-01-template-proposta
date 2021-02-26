@@ -31,7 +31,7 @@ public class NovoBloqueioController {
     }
 
     @PostMapping
-    public ResponseEntity<?> cria(@RequestBody @Valid BloqueioRequest request,
+    public ResponseEntity<?> cria(@RequestBody @Valid NovoBloqueioRequest request,
                                   @RequestHeader(value = "User-Agent") String userAgent,
                                   HttpServletRequest servletRequest,
                                   UriComponentsBuilder uriBuilder){
@@ -61,7 +61,7 @@ public class NovoBloqueioController {
             propostaRepository.save(possivelProposta.get());
 
             URI uri = uriBuilder.path("/api/solicita-bloqueio/{id}").buildAndExpand(novoBloqueio.getId()).toUri();
-            return ResponseEntity.created(uri).body(new BloqueioResponse(novoBloqueio));
+            return ResponseEntity.created(uri).body(new NovoBloqueioResponse(novoBloqueio));
         }catch (FeignException.UnprocessableEntity unprocessableEntity){
             return ResponseEntity.unprocessableEntity().build();
         }

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
 
-public class BloqueioResponse {
+public class NovoBloqueioResponse {
 
     @JsonProperty
     private Long id;
@@ -21,7 +21,7 @@ public class BloqueioResponse {
     @JsonProperty
     private String userAgent;
 
-    public BloqueioResponse(Bloqueio bloqueio) {
+    public NovoBloqueioResponse(Bloqueio bloqueio) {
         this.id = bloqueio.getId();
         this.idCartao = bloqueio.getIdCartao();
         this.instanteDoBloqueio = bloqueio.getInstanteDoBloqueio();

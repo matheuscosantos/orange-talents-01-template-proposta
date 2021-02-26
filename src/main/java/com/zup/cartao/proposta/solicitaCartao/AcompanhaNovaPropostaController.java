@@ -22,7 +22,7 @@ public class AcompanhaNovaPropostaController {
     public ResponseEntity<?> acompanhaProposta(@PathVariable Long id){
         Optional<Proposta> possivelProposta = repository.findById(id);
         if(possivelProposta.isPresent()){
-            return ResponseEntity.ok(new PropostaResponse(possivelProposta.get()));
+            return ResponseEntity.ok(new NovaPropostaResponse(possivelProposta.get()));
         }
         return ResponseEntity.notFound().build();
     }
