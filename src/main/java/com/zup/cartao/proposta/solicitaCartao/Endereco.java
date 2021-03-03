@@ -40,6 +40,10 @@ public class Endereco {
     @NotEmpty
     private String pais;
 
+    @Deprecated
+    public Endereco() {
+    }
+
     public Endereco(@NotEmpty @NotNull String cep,
                     @NotEmpty @NotNull String logradouro,
                     @NotEmpty @NotNull String numero,
@@ -67,9 +71,7 @@ public class Endereco {
         this.pais = pais;
     }
 
-    @Deprecated
-    public Endereco() {
-    }
+
 
     public String getCep() {
         return cep;

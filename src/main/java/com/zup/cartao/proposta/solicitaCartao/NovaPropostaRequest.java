@@ -68,4 +68,16 @@ public class NovaPropostaRequest {
                             this.salario,
                             password);
     }
+
+    public NovaPropostaRequest(@NotEmpty String nome,
+                               @NotEmpty String documento,
+                               @NotEmpty @Email String email,
+                               @Valid NovoEnderecoRequest endereco,
+                               @Positive BigDecimal salario) {
+        this.nome = nome;
+        this.documento = documento;
+        this.email = email;
+        this.endereco = endereco;
+        this.salario = salario;
+    }
 }

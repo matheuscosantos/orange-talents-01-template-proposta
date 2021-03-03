@@ -6,7 +6,7 @@ public enum Status {
     public static Status resultadoPara(String solicitacao) {
         if(solicitacao.equals("COM_RESTRICAO")){
             return NAO_ELEGIVEL;
-        }else if(solicitacao.isEmpty()){
+        }else if(solicitacao.equals("SEM_RESTRICAO")){
             return ELEGIVEL;
         }
         return null;
