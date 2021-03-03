@@ -21,6 +21,12 @@ public class NovaBiometriaRequest {
     public NovaBiometriaRequest() {
     }
 
+    public NovaBiometriaRequest(@NotNull @NotEmpty String idCartao,
+                                @NotNull @NotEmpty String fingerprint) {
+        this.idCartao = idCartao;
+        this.fingerprint = fingerprint;
+    }
+
     public NovaBiometriaRequest(String fingerprint) {
         this.fingerprint = fingerprint;
     }

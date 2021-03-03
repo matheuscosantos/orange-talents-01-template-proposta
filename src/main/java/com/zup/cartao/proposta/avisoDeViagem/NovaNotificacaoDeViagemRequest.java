@@ -25,6 +25,18 @@ public class NovaNotificacaoDeViagemRequest {
     @Future
     private LocalDate dataDeTermino;
 
+    /*
+    Construtor utilizado para testes
+     */
+    @Deprecated
+    public NovaNotificacaoDeViagemRequest(@NotNull @NotEmpty String idCartao,
+                                          @NotNull @NotEmpty String destino,
+                                          @NotNull @Future LocalDate dataDeTermino) {
+        this.idCartao = idCartao;
+        this.destino = destino;
+        this.dataDeTermino = dataDeTermino;
+    }
+
     public NotificacaoDeViagem paraNotificacaoDeViagem(String ipDoCliente, String userAgent) {
         return new NotificacaoDeViagem(
                 idCartao,

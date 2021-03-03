@@ -74,6 +74,29 @@ public class Proposta {
         this.email = email;
         this.endereco = endereco;
         this.salario = salario;
+        this.status = Status.ELEGIVEL;
+    }
+
+    /*
+    Contrutor utilizado para testes
+     */
+    @Deprecated
+    public Proposta(Long id,
+                    String nome,
+                    String documento,
+                    String email,
+                    Endereco endereco,
+                    BigDecimal salario,
+                    Status status,
+                    String numeroDoCartao) {
+        this.id = id;
+        this.nome = nome;
+        this.documento = documento;
+        this.email = email;
+        this.endereco = endereco;
+        this.salario = salario;
+        this.status = status;
+        this.numeroDoCartao = numeroDoCartao;
     }
 
     public Long getId() {

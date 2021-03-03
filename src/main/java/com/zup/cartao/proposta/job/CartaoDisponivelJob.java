@@ -28,11 +28,11 @@ public class CartaoDisponivelJob {
 
     Proposta proposta;
 
-    @Scheduled(fixedDelay = 3000)
+    @Scheduled(fixedDelay = 1000)
     @Transactional
     public void buscaNumeroDoCartao(){
 
-        List<Proposta> propostas = repository.findAllElegiveisSemCartao();
+        List<Proposta> propostas = repository.findAllElegiveis();
 
         try{
             for(Proposta proposta: propostas){

@@ -69,4 +69,22 @@ public class NovoEnderecoRequest {
     public String getPais() {
         return pais;
     }
+
+    public NovoEnderecoRequest(@NotEmpty String cep,
+                               @NotEmpty String logradouro,
+                               @NotEmpty String numero,
+                               @NotEmpty String complemento,
+                               @NotEmpty String bairro,
+                               @NotEmpty String municipio,
+                               @NotEmpty String estado,
+                               @NotEmpty String pais) {
+        this.cep = cep;
+        this.logradouro = logradouro;
+        this.numero = numero;
+        this.complemento = complemento;
+        this.bairro = bairro;
+        this.municipio = municipio;
+        this.estado = estado;
+        this.pais = pais;
+    }
 }
